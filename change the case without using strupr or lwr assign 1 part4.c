@@ -8,8 +8,7 @@ int main()
     int i;
 
     printf("Enter  the string: ");
-    gets(s);
-
+    scanf("%c",&s);
     p=s;
 
     i=0;
