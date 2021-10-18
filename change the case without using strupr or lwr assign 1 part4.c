@@ -22,7 +22,7 @@ int main()
         i++;
  	}
 
-    printf("string in changes case is as follows ='%s'\n",p);
+    printf("string in changed case is as follows ='%s'\n",p);
 
 
 
