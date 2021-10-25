@@ -101,6 +101,7 @@ while(i<SIZE)
 {
   j=0;
   while(j < SIZE)
+  {
   if(array1[i]==array2[j])
   {
     break;
@@ -113,6 +114,7 @@ difference_array[k]=array1[i];
 k++;
 }
 i++;
+}
 
 return(k);
 }
