@@ -2,22 +2,22 @@
 #include<string.h>
 #include <stdlib.h>
 int n;
-struct cricket
+struct cricket_player
 {
 char name[100], country[100], category[100];
-int age, odi, twenty, batscore, wkts;
+int age, odi, T_20, batscore, wkts;
 };
 
-void bat_country(struct cricket a[]);
-void bowl_country(struct cricket a[]);
-void maxwickets(struct cricket a[]);
-void display_one(struct cricket a[]);
-void max_avg_score(struct cricket a[]);
+void max_bat_country(struct cricket_player q[]);
+void max_bowling_country(struct cricket_player q[]);
+void most_wickets(struct cricket_player q[]);
+void show_info(struct cricket_player q[]);
+void max_avg_score(struct cricket_player q[]);
 int main()
 {
-struct cricket s[10];
+struct cricket_player h[100];
 int i, choice;
-char cntry[15], nm[15];
+char cntry[100], r[100];
 printf("\n********Cricket guidebook for records*********\n");
 printf("\nPlease provide the player count ");
 scanf("%d",&n);
@@ -25,21 +25,21 @@ printf("\n Please give the required information of %d players\n",n);
 for(i=0;i<n;i++)
 {
 printf("Enter name of the player ");
-scanf("%s", s[i].name);
+scanf("%s", h[i].name);
 printf("Enter age of the player ");
-scanf("%d", &s[i].age);
+scanf("%d", &h[i].age);
 printf("Enter country of the player ");
-scanf("%s", s[i].country);
+scanf("%s", h[i].country);
 printf("Enter category of the player ");
-scanf("%s", s[i].category);
+scanf("%s", h[i].category);
 printf("Enter Number of ODIs played ");
-scanf("%d", &s[i].odi);
+scanf("%d", &h[i].odi);
 printf("Enter Number of International T_20s played ");
-scanf("%d", &s[i].twenty);
+scanf("%d", &h[i].T_20);
 printf("Enter Average batting score ");
-scanf("%d", &s[i].batscore);
+scanf("%d", &h[i].batscore);
 printf("Enter Total number of wickets taken ");
-scanf("%d", &s[i].wkts);
+scanf("%d", &h[i].wkts);
 printf("\n");
 }
 
@@ -57,40 +57,40 @@ scanf("%d",&choice);
 
 switch(choice)
 {
-  case 1: bat_country(s);
+  case 1: max_bat_country(h);
   break;
 
-  case 2: bowl_country(s);
+  case 2:  max_bowling_country(h);
   break;
 
-  case 3: maxwickets(s);
+  case 3: most_wickets(h);
   break;
 
-  case 4: display_one(s);
+  case 4:  show_info(h);
   break;
 
-  case 5: max_avg_score(s);
+  case 5: max_avg_score(h);
   break;
 }
 }while(choice!=6);
 }
 
-void bat_country(struct cricket a[])
+void max_bat_country(struct cricket_player h[])
 {
   int ctr;
-  char cntry[15];
+  char cntry[100];
   ctr=0;
 printf("\nEnter country to display number of batsman: ");
 scanf("%s",cntry);
 for(int i=0; i<n; i++)
 {
-if((strcmp(cntry,a[i].country)==0)&&(strcmp("batsman",a[i].category)==0))
+if((strcmp(cntry,h[i].country)==0)&&(strcmp("batsman",h[i].category)==0))
 ctr++;
 }
 printf("\nNumber of batsman of country %s = %d ", cntry,ctr);
 }
 
-void bowl_country(struct cricket a[])
+void max_bowling_country(struct cricket_player h[])
 {
   int ctr=0;
   char cntry[15];
@@ -98,61 +98,61 @@ printf("\nEnter country to display number of bowlers: ");
 scanf("%s", cntry);
 for(int i=0; i<n; i++)
 {
-if((strcmp(cntry,a[i].country)==0)&&(strcmp("bowler",a[i].category)==0))
+if((strcmp(cntry,h[i].country)==0)&&(strcmp("bowler",h[i].category)==0))
 ctr++;
 }
 printf("\nNumber of bowlers of a %s country= %d ", cntry,ctr);
 }
 
-void maxwickets(struct cricket a[])
+void  most_wickets(struct cricket_player h[])
 {
 int ctr=0;
 int index=0;
 for(int i=0; i<n; i++)
 {
-if(strcmp("bowler",a[i].category)==0)
+if(strcmp("bowler",h[i].category)==0)
 {
-if (a[i].wkts>ctr)
+if (h[i].wkts>ctr)
 
 {
-ctr=a[i].wkts;
+ctr=h[i].wkts;
 index=i;
 }
 }
 }
-printf("\n Name of Bowler who has taken maximum no of wickets is %s\n", a[index].name);
+printf("\n Name of Bowler who has taken maximum no of wickets is %s\n", h[index].name);
 }
 
-void display_one(struct cricket a[])
+void  show_info(struct cricket_player h[])
 {
-char nm[15];
+char r[15];
 printf("\n Enter Name of player to display data ");
-scanf("%s", nm);
+scanf("%s", r);
 for(int i=0; i<n; i++)
 {
-if(strcmp(nm,a[i].name)==0)
+if(strcmp(r,h[i].name)==0)
 {
-printf("name \tcountry \tcategory \tage \todi \t20-20s \tbatscore \twkts\n");
-printf("%s \t\t%s \t\t%s \t\t%d ",a[i].name, a[i].country,a[i].category, a[i].age);
-printf("\t\t%d \t\t%d \t\t%d \t\t%d\n",a[i].odi,a[i].twenty ,a[i].batscore, a[i].wkts);
+printf("name \tcountry  \tcategory  \tage  \todi  \t20-20s \tbatscore \twkts\n");
+printf("%s \t\t%s \t\t%s \t\t%d ",h[i].name, h[i].country,h[i].category, h[i].age);
+printf("\t\t%d \t\t%d \t\t%d \t\t%d\n",h[i].odi,h[i].T_20 ,h[i].batscore, h[i].wkts);
 }
 }
 }
 
-void max_avg_score(struct cricket a[])
+void max_avg_score(struct cricket_player h[])
 {
-int ctr=a[0].batscore;
+int ctr=h[0].batscore;
 int index=0;
 for(int i=0; i<n; i++)
 {
-if(strcmp("batsman",a[i].category)==0)
+if(strcmp("batsman",h[i].category)==0)
 {
-if (a[i].batscore>ctr)
+if (h[i].batscore>ctr)
 {
-ctr=a[i].batscore;
+ctr=h[i].batscore;
 index=i;
 }
 }
 }
-printf("\n Name of Batsman with highest average score is %s with score %d\n",a[index].name,ctr);
+printf("\n Name of Batsman with highest average score is %s with score %d\n",h[index].name,ctr);
 }
