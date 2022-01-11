@@ -213,3 +213,91 @@ int eval_postfix(char postfix[20])
     top = pop(top);
     return x;
 }
+
+int eval_prefix(char prefix[20])
+{
+    char prefix_rev[20];
+    strcpy(prefix_rev, string_rev(prefix, prefix_rev));
+
+    STACK *top = NULL;
+    int i = 0;
+    char token, x;
+    for (i = 0; prefix_rev[i] != '\0'; i++)
+    {
+        token = prefix_rev[i];
+        if (Isdigit(token))
+        {
+            top = push(top, token - 48);
+        }
+        else
+        {
+            int op1, op2;
+            op1 = readTop(top);
+
+            top = pop(top);
+            op2 = readTop(top);
+            top = pop(top);
+            switch (token)
+            {
+            case '+':
+                x = op1 + op2;
+                break;
+            case '-':
+                x = op1 - op2;
+                break;
+            case '*':
+                x = op1 * op2;
+                break;
+            case '/':
+                x = op1 / op2;
+                break;
+            }
+            top = push(top, x);
+        }
+    }
+    x = readTop(top);
+    top = pop(top);
+    return x;
+}
+
+int main()
+{
+    char postfix[20];
+    char infix[20];
+    char prefix[20];
+
+    int choice;
+    do
+    {
+        printf("\n\n1.infix_to_postfix\n2.infix_to_prefix\n3.postfix evaluation\n4.prefix  evaluation\n0.Exit\nEnter  your  choice  ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            printf("\nEnter  infix  expression  ");
+
+            scanf("%s", infix);
+            printf("%s", infix_to_postfix(infix, postfix));
+            break;
+
+        case 2:
+            printf("\nEnter  infix  expression  ");
+            scanf("%s", infix);
+            infix_to_prefix(infix, prefix);
+            break;
+        case 3:
+            printf("\nEnter  postfix  expression  ");
+            scanf("%s", postfix);
+            printf("\nans=  %d  ", eval_postfix(postfix));
+            break;
+        case 4:
+            printf("\nEnter  prefix  expression  ");
+            scanf("%s", prefix);
+            printf("ans=  %d  ", eval_prefix(prefix));
+            break;
+
+        case 0:
+            break;
+        }
+    } while (choice != 0);
+}
